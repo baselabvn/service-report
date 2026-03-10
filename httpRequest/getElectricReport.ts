@@ -3,7 +3,25 @@ import { SuccessResponse, ErrorResponse } from '#types/http'
 
 const { IOT_GATEWAY } = process.env
 
-export const getElectricReport = async (projectId: string, id: string, from: string, to: string): Promise<SuccessResponse<any> | ErrorResponse> => {
+type ElectricReportData = {
+    date: string
+    highSlotConsump: number
+    lowSlotConsump: number
+    mediumSlotConsump: number
+    powerConsump: number
+    reactConsump: number
+}
+
+type ResponseReportData = {
+    data: ElectricReportData[]
+    highSlotConsump: number
+    lowSlotConsump: number
+    mediumSlotConsump: number
+    powerConsump: number
+    reactConsump: number
+}
+
+export const getElectricReport = async (projectId: string, id: string, from: string, to: string): Promise<SuccessResponse<ResponseReportData> | ErrorResponse> => {
     try {
         const response = await axios.post(
             `${IOT_GATEWAY}/api/Electric/Report/${id}`,
