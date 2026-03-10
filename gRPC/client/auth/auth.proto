@@ -1,0 +1,93 @@
+syntax = "proto3";
+import "google/protobuf/wrappers.proto";
+
+package auth;
+
+service AuthService {
+    rpc Check (HealthCheckRequest) returns (HealthCheckResponse);
+    rpc Watch (HealthCheckRequest) returns (stream HealthCheckResponse);
+    rpc Verify (VerifyRequest) returns (VerifyResponse);
+    rpc GetRoles (GetRolesRequest) returns (GetRolesResponse);
+    rpc WatchRoles (GetRolesRequest) returns (stream GetRolesResponse);
+    rpc GetUserDevices (GetUserDevicesRequest) returns (GetUserDevicesResponse);
+    rpc GetUserById (GetUserByIdRequest) returns (GetUserByIdResponse);
+    rpc WatchUser (WatchUserRequest) returns (stream WatchUserResponse);
+}
+
+message HealthCheckRequest {
+    string service = 1; // tên service, có thể "" để check toàn bộ server
+}
+message HealthCheckResponse {
+    enum ServingStatus {
+        UNKNOWN = 0;
+        SERVING = 1;
+        NOT_SERVING = 2;
+        SERVICE_UNKNOWN = 3; // reserved for future use
+    }
+    ServingStatus status = 1;
+}
+
+message VerifyRequest {
+    optional string authorization = 1;
+}
+message VerifyResponse {
+    string userId = 1;
+    string username = 2;
+    optional string avatar = 3;
+}
+
+message Permission {
+    string id = 1;
+    string name = 2;
+}
+
+message Role {
+    string id = 1;
+    string name = 2;
+    repeated Permission permissions = 3;
+}
+
+message GetRolesRequest {}
+message GetRolesResponse {
+    repeated Role roles = 1;
+}
+
+message Device {
+    string id = 1; 
+    string userId = 2;
+    string localDeviceId = 3;
+    string deviceName = 4;
+    string fcmToken = 5;
+    bool registerNotification = 6;
+}
+
+message GetUserDevicesRequest {
+    string account = 1;
+}
+message GetUserDevicesResponse {
+    repeated Device devices = 1;
+}
+
+message User {
+    string id = 1;
+    string username = 2;
+    string email = 3;
+    bool emailConfirmed = 4;
+    optional string avatar = 5;
+    bool isActive = 6;
+    bool deleted = 7;
+    string createdAt = 8;
+    string updatedAt = 9;
+}
+
+message GetUserByIdRequest {
+    string id = 1;
+}
+message GetUserByIdResponse {
+    optional User user = 1;
+}
+
+message WatchUserRequest {}
+message WatchUserResponse {
+    User user = 1;
+}
