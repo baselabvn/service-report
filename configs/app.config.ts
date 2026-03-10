@@ -9,7 +9,8 @@ export const TIME_ZONE = 'Asia/Ho_Chi_Minh'
 
 export const PATH = Object.freeze({
     CACHE: path.join(global.dirname, '/cache'),
-    LOG: path.join(global.dirname, '/logs')
+    LOG: path.join(global.dirname, '/logs'),
+    STORAGE: path.join(global.dirname, '/storage')
 })
 
 export default {

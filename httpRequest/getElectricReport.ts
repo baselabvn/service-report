@@ -35,7 +35,7 @@ export const getElectricReport = async (projectId: string, id: string, from: str
                 }
             }
         )
-        
+
         return {
             success: true,
             message: 'success',
