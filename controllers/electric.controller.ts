@@ -54,8 +54,8 @@ export const exportExcel = generateHander<ValidatedRequest>(async (req, res, nex
 
             sheet.cell(`A${rowNumber}`).value(index + 1) // STT
             sheet.cell(`B${rowNumber}`).value(formattedDate) // Thời gian
-            sheet.cell(`C${rowNumber}`).value(item.powerConsump) // Lượng tiêu thụ
-            sheet.cell(`D${rowNumber}`).value(item.reactConsump) // Lượng phản kháng
+            sheet.cell(`C${rowNumber}`).value(item.powerconsump) // Lượng tiêu thụ
+            sheet.cell(`D${rowNumber}`).value(item.reactconsump) // Lượng phản kháng
             sheet.cell(`E${rowNumber}`).value(0) // Tiền điện
         })
 

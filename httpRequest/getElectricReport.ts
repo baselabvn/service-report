@@ -5,20 +5,20 @@ const { IOT_GATEWAY } = process.env
 
 type ElectricReportData = {
     date: string
-    highSlotConsump: number
-    lowSlotConsump: number
-    mediumSlotConsump: number
-    powerConsump: number
-    reactConsump: number
+    highslotconsump: number
+    lowslotconsump: number
+    mediumslotconsump: number
+    powerconsump: number
+    reactconsump: number
 }
 
 type ResponseReportData = {
     data: ElectricReportData[]
-    highSlotConsump: number
-    lowSlotConsump: number
-    mediumSlotConsump: number
-    powerConsump: number
-    reactConsump: number
+    highslotconsump: number
+    lowslotconsump: number
+    mediumslotconsump: number
+    powerconsump: number
+    reactconsump: number
 }
 
 export const getElectricReport = async (projectId: string, id: string, from: string, to: string): Promise<SuccessResponse<ResponseReportData> | ErrorResponse> => {
