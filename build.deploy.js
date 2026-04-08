@@ -3,7 +3,7 @@ const path = require('path')
 
 const filesToCopy = [
     { source: './package.json', destination: './build/package.json' },
-    { source: './.env', destination: './build/.env' },
+    { source: './.env', destination: './build/.env' }
 ]
 
 for (const fileToCopy of filesToCopy) {
@@ -29,7 +29,7 @@ function copyFile(source, destination) {
     console.log(`Copied ${source} -> ${destination}`)
 }
 
-function copyProtos(srcDir, destDir) {
+function copyProto(srcDir, destDir) {
     if (!fs.existsSync(srcDir)) return
 
     for (const entry of fs.readdirSync(srcDir, { withFileTypes: true })) {
@@ -37,11 +37,27 @@ function copyProtos(srcDir, destDir) {
         const destPath = path.join(destDir, entry.name)
 
         if (entry.isDirectory()) {
-            copyProtos(srcPath, destPath)
+            copyProto(srcPath, destPath)
         } else if (entry.isFile() && srcPath.endsWith('.proto')) {
             copyFile(srcPath, destPath)
         }
     }
 }
 
-copyProtos('./gRPC', './build/gRPC')
+function copyDir(srcDir, destDir) {
+    if (!fs.existsSync(srcDir)) return
+
+    for (const entry of fs.readdirSync(srcDir, { withFileTypes: true })) {
+        const srcPath = path.join(srcDir, entry.name)
+        const destPath = path.join(destDir, entry.name)
+
+        if (entry.isDirectory()) {
+            copyDir(srcPath, destPath)
+        } else if (entry.isFile()) {
+            copyFile(srcPath, destPath)
+        }
+    }
+}
+
+copyProto('./gRPC', './build/gRPC')
+copyDir('./storage/template', './build/storage/template')

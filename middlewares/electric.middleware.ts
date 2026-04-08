@@ -31,10 +31,12 @@ export const index = generateHander<RequestWithMessage>(async (req, res, next) =
 export const exportExcel = generateHander<RequestWithMessage>(async (req, res, next) => {
     try {
         const message = req.message
-        const { deviceId, from, to } = req.body as ExportExcelBody
+        const { deviceId, deviceName, from, to } = req.body as ExportExcelBody
 
         if (isNull(deviceId) || isUndefined(deviceId)) throw new Error(message.electric.DEVICE_ID_EMPTY)
         if (!isString(deviceId)) throw new Error(message.electric.DEVICE_ID_NOT_STRING)
+        
+        if (!isUndefined(deviceName) && !isString(deviceName)) throw new Error('DEVICE_NAME_NOT_STRING')
 
         if (isNull(from) || isUndefined(from)) throw new Error(message.electric.FROM_DATE_EMPTY)
         if (!isString(from)) throw new Error(message.electric.FROM_DATE_NOT_STRING)

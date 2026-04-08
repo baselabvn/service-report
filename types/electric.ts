@@ -12,12 +12,14 @@ export type ValidatedElectricBody = {
 
 export type ExportExcelBody = {
     deviceId?: unknown
+    deviceName?: unknown
     from?: unknown
     to?: unknown
 }
 
 export type ValidatedExportExcelBody = {
     deviceId: string
+    deviceName?: string
     from: string
     to: string
 }
