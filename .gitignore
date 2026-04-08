@@ -143,3 +143,5 @@ build
 
 # Mac
 .DS_Store
+
+storage/report
