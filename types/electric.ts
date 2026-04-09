@@ -5,7 +5,7 @@ export type ElectricBody = {
 }
 
 export type ValidatedElectricBody = {
-    deviceId: string
+    deviceId?: string
     from: string
     to: string
 }
@@ -18,7 +18,7 @@ export type ExportExcelBody = {
 }
 
 export type ValidatedExportExcelBody = {
-    deviceId: string
+    deviceId?: string
     deviceName?: string
     from: string
     to: string

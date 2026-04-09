@@ -21,10 +21,10 @@ type ResponseReportData = {
     reactconsump: number
 }
 
-export const getElectricReport = async (projectId: string, id: string, from: string, to: string): Promise<SuccessResponse<ResponseReportData> | ErrorResponse> => {
+export const getElectricReport = async (projectId: string, id: string | undefined, from: string, to: string): Promise<SuccessResponse<ResponseReportData> | ErrorResponse> => {
     try {
         const response = await axios.post(
-            `${IOT_GATEWAY}/api/Electric/Report/${id}`,
+            `${IOT_GATEWAY}/api/Electric/Report`,
             {
                 from,
                 to
@@ -32,6 +32,9 @@ export const getElectricReport = async (projectId: string, id: string, from: str
             {
                 headers: {
                     projectid: projectId
+                },
+                params: {
+                    id
                 }
             }
         )
